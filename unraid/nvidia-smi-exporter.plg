@@ -6,7 +6,7 @@
   <!ENTITY pluginURL   "https://github.com/ccmpbll/nvidia-smi-exporter/raw/main/unraid/nvidia-smi-exporter.plg">
   <!ENTITY pkgver      "&version;-x86_64-1">
   <!ENTITY tgzURL      "https://github.com/ccmpbll/nvidia-smi-exporter/releases/download/v&version;/nvidia-smi-exporter-&pkgver;.tgz">
-  <!ENTITY md5         "877d0bb39f473cbe1afda4ded016562e">
+  <!ENTITY md5         "8deabf87f104fea784e410ae566d36a1">
   <!ENTITY cfgdir      "/boot/config/plugins/nvidia-smi-exporter">
 ]>
 
