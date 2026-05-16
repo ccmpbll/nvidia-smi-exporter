@@ -1,4 +1,4 @@
-# nvidia-smi-exporter
+# nvidia-smi-exporter ![Image Build Status](https://img.shields.io/github/actions/workflow/status/ccmpbll/nvidia-smi-exporter/docker.yml?branch=main) ![Docker Image Size](https://img.shields.io/docker/image-size/ccmpbll/nvidia-smi-exporter/latest) ![Docker Pulls](https://img.shields.io/docker/pulls/ccmpbll/nvidia-smi-exporter.svg) ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 A Prometheus exporter for NVIDIA GPU metrics via `nvidia-smi`. Compatible with all GPU
 architectures (Turing, Ampere, Ada Lovelace, Blackwell) and **all driver versions**, including
