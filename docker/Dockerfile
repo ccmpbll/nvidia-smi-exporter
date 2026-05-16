@@ -5,7 +5,7 @@ COPY src/ .
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o nvidia-smi-exporter .
 
 # Stage 2: minimal CUDA image that ships nvidia-smi
-FROM nvidia/cuda:12.6.2-base-ubuntu24.04
+FROM nvidia/cuda:13.2.1-base-ubuntu24.04
 
 RUN useradd -r -s /usr/sbin/nologin nvidia-smi-exporter
 
