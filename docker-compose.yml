@@ -1,6 +1,6 @@
 services:
   nvidia-smi-exporter:
-    image: ghcr.io/ccmpbll/nvidia-smi-exporter:latest
+    image: ccmpbll/nvidia-smi-exporter:latest
     runtime: nvidia
     privileged: true
     ports:

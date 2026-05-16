@@ -36,7 +36,7 @@ See [LICENSE](LICENSE) for full attribution.
 ```yaml
 services:
   nvidia-smi-exporter:
-    image: ghcr.io/ccmpbll/nvidia-smi-exporter:latest
+    image: ccmpbll/nvidia-smi-exporter:latest
     runtime: nvidia
     privileged: true
     ports:
@@ -59,7 +59,7 @@ docker run -d \
   -p 9202:9202 \
   -e NVIDIA_VISIBLE_DEVICES=all \
   -e NVIDIA_DRIVER_CAPABILITIES=utility \
-  ghcr.io/ccmpbll/nvidia-smi-exporter:latest
+  ccmpbll/nvidia-smi-exporter:latest
 ```
 
 ### Environment variables
