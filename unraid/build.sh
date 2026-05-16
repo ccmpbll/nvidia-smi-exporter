@@ -50,7 +50,7 @@ EXPORTER_PORT=":${PORT:-9202}"
 
 nvidia_smi_check() {
   if [ ! -x /usr/bin/nvidia-smi ]; then
-    logger -t "$LOGNAME" "ERROR: /usr/bin/nvidia-smi not found. Install the 'Nvidia Driver' plugin by ich777 first."
+    logger -t "$LOGNAME" "ERROR: /usr/bin/nvidia-smi not found. Install the 'Nvidia-Driver' plugin from Community Applications first."
     return 1
   fi
 }
@@ -181,7 +181,7 @@ nvidia-smi-exporter: Exports NVIDIA GPU metrics via nvidia-smi in Prometheus tex
 nvidia-smi-exporter: Supports all GPU architectures including Blackwell (RTX 5000-series,
 nvidia-smi-exporter: driver 595+). Listens on port 9202 by default.
 nvidia-smi-exporter:
-nvidia-smi-exporter: Requires: Nvidia Driver plugin by ich777
+nvidia-smi-exporter: Requires: Nvidia-Driver plugin (Community Applications)
 nvidia-smi-exporter:
 nvidia-smi-exporter:
 nvidia-smi-exporter:

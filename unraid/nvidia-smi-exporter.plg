@@ -20,10 +20,10 @@
 - Adds average_power_draw and instant_power_draw metrics (Blackwell+)
 - Adds architecture label on all metrics
 - Adds jpeg_util and ofa_util utilization metrics
-- Requires ich777's Nvidia Driver plugin for nvidia-smi
+- Requires the Nvidia-Driver plugin for nvidia-smi
 </CHANGES>
 
-<!-- Prerequisite check: nvidia-smi must be present (provided by ich777's Nvidia Driver plugin) -->
+<!-- Prerequisite check: nvidia-smi must be present (provided by the Nvidia-Driver plugin) -->
 <FILE Run="/bin/bash">
   <INLINE>
 if [ ! -x /usr/bin/nvidia-smi ]; then
@@ -31,9 +31,9 @@ if [ ! -x /usr/bin/nvidia-smi ]; then
   echo " ERROR: nvidia-smi not found at /usr/bin/nvidia-smi"
   echo ""
   echo " The Nvidia SMI Exporter plugin requires the Nvidia Driver"
-  echo " plugin by ich777 to be installed first."
+  echo " plugin to be installed first."
   echo ""
-  echo " Please install the 'Nvidia Driver' plugin from the Unraid"
+  echo " Please install the 'Nvidia-Driver' plugin from the Unraid"
   echo " Community Applications and try again."
   echo "-----------------------------------------------------------"
   exit 1

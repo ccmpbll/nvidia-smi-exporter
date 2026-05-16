@@ -71,7 +71,7 @@ docker run -d \
 
 ### Prerequisites
 
-Install the **Nvidia Driver** plugin by **ich777** from Community Applications first.
+Install the **Nvidia-Driver** plugin from Community Applications first.
 This plugin installs `nvidia-smi` at `/usr/bin/nvidia-smi` on the Unraid host.
 
 The nvidia-smi-exporter plugin will abort installation with a clear error message if
