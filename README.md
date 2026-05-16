@@ -69,7 +69,6 @@ docker run -d \
 | Variable | Default | Description |
 |---|---|---|
 | `LISTEN_ADDRESS` | `:9202` | HTTP listen address |
-| `NVIDIA_SMI_PATH` | `/usr/bin/nvidia-smi` | Path to nvidia-smi binary |
 | `TEST_MODE` | — | Set to `1` to read `nvidia-smi.sample.xml` instead of running nvidia-smi |
 
 ## Unraid Installation
