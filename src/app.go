@@ -232,7 +232,6 @@ func gpuLabels(gpu GPU) string {
 }
 
 func metrics(w http.ResponseWriter, r *http.Request) {
-	log.Print("Serving /metrics")
 
 	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
 	defer cancel()
@@ -444,7 +443,7 @@ func main() {
 		log.Print("Test mode is enabled")
 	}
 	logDetectedGPUs()
-	log.Printf("Nvidia SMI exporter listening on %s", listenAddress)
+	log.Printf("Nvidia SMI exporter listening on %s — metrics available at /metrics", listenAddress)
 	http.HandleFunc("/", index)
 	http.HandleFunc("/healthz", healthz)
 	http.HandleFunc("/metrics", metrics)
