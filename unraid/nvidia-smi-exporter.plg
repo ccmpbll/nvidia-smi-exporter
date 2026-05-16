@@ -1,0 +1,80 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+  <!ENTITY name        "nvidia-smi-exporter">
+  <!ENTITY author      "Chris Campbell">
+  <!ENTITY version     "2026.05.12">
+  <!ENTITY pluginURL   "https://github.com/ccmpbll/nvidia-smi-exporter/raw/main/unraid/nvidia-smi-exporter.plg">
+  <!ENTITY pkgver      "&version;-x86_64-1">
+  <!ENTITY tgzURL      "https://github.com/ccmpbll/nvidia-smi-exporter/releases/download/v&version;/nvidia-smi-exporter-&pkgver;.tgz">
+  <!ENTITY md5         "INSERT_MD5_HASH_HERE">
+  <!ENTITY cfgdir      "/boot/config/plugins/nvidia-smi-exporter">
+]>
+
+<PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0">
+
+<CHANGES>
+###2026.05.12###
+- Initial release
+- Supports NVIDIA Blackwell (RTX 5000-series, driver 595+) and all older architectures
+- Fixes Prometheus scrape failures caused by deprecated power_state fields on Blackwell GPUs
+- Adds average_power_draw and instant_power_draw metrics (Blackwell+)
+- Adds architecture label on all metrics
+- Adds jpeg_util and ofa_util utilization metrics
+- Requires ich777's Nvidia Driver plugin for nvidia-smi
+</CHANGES>
+
+<!-- Prerequisite check: nvidia-smi must be present (provided by ich777's Nvidia Driver plugin) -->
+<FILE Run="/bin/bash">
+  <INLINE>
+if [ ! -x /usr/bin/nvidia-smi ]; then
+  echo "-----------------------------------------------------------"
+  echo " ERROR: nvidia-smi not found at /usr/bin/nvidia-smi"
+  echo ""
+  echo " The Nvidia SMI Exporter plugin requires the Nvidia Driver"
+  echo " plugin by ich777 to be installed first."
+  echo ""
+  echo " Please install the 'Nvidia Driver' plugin from the Unraid"
+  echo " Community Applications and try again."
+  echo "-----------------------------------------------------------"
+  exit 1
+fi
+echo "nvidia-smi found: $(/usr/bin/nvidia-smi --version 2>/dev/null | head -1)"
+  </INLINE>
+</FILE>
+
+<!-- Create config directory on the flash drive -->
+<FILE Run="/bin/bash">
+  <INLINE>
+mkdir -p "&cfgdir;"
+if [ ! -f "&cfgdir;/nvidia-smi-exporter.cfg" ]; then
+  echo "PORT=9202" > "&cfgdir;/nvidia-smi-exporter.cfg"
+fi
+  </INLINE>
+</FILE>
+
+<!-- Download and install the Slackware package -->
+<FILE Name="/boot/config/plugins/nvidia-smi-exporter/nvidia-smi-exporter-&pkgver;.tgz"
+      Run="upgradepkg --install-new">
+  <URL>&tgzURL;</URL>
+  <MD5>&md5;</MD5>
+</FILE>
+
+<!-- Start the exporter -->
+<FILE Run="/bin/bash">
+  <INLINE>
+/etc/rc.d/rc.nvidia-smi-exporter start
+  </INLINE>
+</FILE>
+
+<!-- Removal: stop service and remove installed files -->
+<FILE Run="/bin/bash" Method="remove">
+  <INLINE>
+/etc/rc.d/rc.nvidia-smi-exporter stop 2>/dev/null
+removepkg nvidia-smi-exporter 2>/dev/null
+rm -rf /usr/local/emhttp/plugins/nvidia-smi-exporter
+rm -f /var/run/nvidia-smi-exporter.pid
+# Config on the flash drive is intentionally preserved for reinstall
+  </INLINE>
+</FILE>
+
+</PLUGIN>
