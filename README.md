@@ -40,12 +40,10 @@ services:
   nvidia-smi-exporter:
     image: ccmpbll/nvidia-smi-exporter:latest
     runtime: nvidia
-    privileged: true
     ports:
       - "9202:9202/tcp"
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=utility
     restart: unless-stopped
 ```
 
@@ -57,10 +55,8 @@ is needed. The NVIDIA runtime provides GPU device access at runtime.
 ```bash
 docker run -d \
   --runtime=nvidia \
-  --privileged \
   -p 9202:9202 \
   -e NVIDIA_VISIBLE_DEVICES=all \
-  -e NVIDIA_DRIVER_CAPABILITIES=utility \
   ccmpbll/nvidia-smi-exporter:latest
 ```
 
