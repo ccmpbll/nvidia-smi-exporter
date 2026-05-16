@@ -29,7 +29,7 @@ func getEnv(key, fallback string) string {
 }
 
 var (
-	listenAddress = getEnv("LISTEN_ADDRESS", ":9202")
+	listenAddress = getEnv("EXPORTER_PORT", ":9202")
 	nvidiaSMIPath = getEnv("NVIDIA_SMI_PATH", "/usr/bin/nvidia-smi")
 	testMode      = os.Getenv("TEST_MODE")
 )

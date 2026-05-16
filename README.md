@@ -64,7 +64,7 @@ docker run -d \
 
 | Variable | Default | Description |
 |---|---|---|
-| `LISTEN_ADDRESS` | `:9202` | HTTP listen address |
+| `EXPORTER_PORT` | `:9202` | HTTP listen address |
 
 ## Unraid Installation
 

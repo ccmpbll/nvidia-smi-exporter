@@ -46,7 +46,7 @@ CFG=/boot/config/plugins/nvidia-smi-exporter/nvidia-smi-exporter.cfg
 LOGNAME=nvidia-smi-exporter
 
 [ -f "$CFG" ] && source "$CFG"
-LISTEN_ADDRESS=":${PORT:-9202}"
+EXPORTER_PORT=":${PORT:-9202}"
 
 nvidia_smi_check() {
   if [ ! -x /usr/bin/nvidia-smi ]; then
@@ -61,8 +61,8 @@ nvidia_start() {
     logger -t "$LOGNAME" "Already running (pid $(cat "$PIDFILE"))"
     return 0
   fi
-  logger -t "$LOGNAME" "Starting on ${LISTEN_ADDRESS}"
-  LISTEN_ADDRESS="$LISTEN_ADDRESS" NVIDIA_SMI_PATH=/usr/bin/nvidia-smi \
+  logger -t "$LOGNAME" "Starting on ${EXPORTER_PORT}"
+  EXPORTER_PORT="$EXPORTER_PORT" NVIDIA_SMI_PATH=/usr/bin/nvidia-smi \
     nohup "$DAEMON" >> "$LOGFILE" 2>&1 &
   echo $! > "$PIDFILE"
 }
