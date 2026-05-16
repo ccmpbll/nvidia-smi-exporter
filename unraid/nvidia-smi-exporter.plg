@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name        "nvidia-smi-exporter">
   <!ENTITY author      "Chris Campbell">
-  <!ENTITY version     "2026.05.16b">
+  <!ENTITY version     "2026.05.16c">
   <!ENTITY pluginURL   "https://github.com/ccmpbll/nvidia-smi-exporter/raw/main/unraid/nvidia-smi-exporter.plg">
   <!ENTITY pkgver      "&version;-x86_64-1">
   <!ENTITY tgzURL      "https://github.com/ccmpbll/nvidia-smi-exporter/releases/download/v&version;/nvidia-smi-exporter-&pkgver;.tgz">
-  <!ENTITY md5         "bb16c2881eba337d5c3a7561c3ba0291">
+  <!ENTITY md5         "32f563bfccdb90b494cb24bd0f477234">
   <!ENTITY cfgdir      "/boot/config/plugins/nvidia-smi-exporter">
 ]>
 
