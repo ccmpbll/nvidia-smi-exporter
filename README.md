@@ -65,6 +65,7 @@ docker run -d \
 | Variable | Default | Description |
 |---|---|---|
 | `EXPORTER_PORT` | `:9202` | HTTP listen address |
+| `NVIDIA_VISIBLE_DEVICES` | — | GPUs to expose: `all` (all GPUs), `0` / `0,1` (by index), `GPU-<uuid>` (by UUID), `none` (disable GPU access) |
 
 ## Unraid Installation
 
