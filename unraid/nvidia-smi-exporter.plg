@@ -1,7 +1,7 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
   <!ENTITY name        "nvidia-smi-exporter">
-  <!ENTITY author      "Chris Campbell">
+  <!ENTITY author      "ccmpbll">
   <!ENTITY version     "2026.05.16e">
   <!ENTITY pluginURL   "https://github.com/ccmpbll/nvidia-smi-exporter/raw/main/unraid/nvidia-smi-exporter.plg">
   <!ENTITY pkgver      "&version;-x86_64-1">
