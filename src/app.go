@@ -409,10 +409,41 @@ func index(w http.ResponseWriter, r *http.Request) {
 </html>`)
 }
 
+func logDetectedGPUs() {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	var cmd *exec.Cmd
+	if testMode == "1" {
+		dir, _ := os.Getwd()
+		cmd = exec.CommandContext(ctx, "/bin/cat", dir+"/nvidia-smi.sample.xml")
+	} else {
+		cmd = exec.CommandContext(ctx, nvidiaSMIPath, "-q", "-x")
+	}
+
+	stdout, err := cmd.Output()
+	if err != nil {
+		log.Printf("GPU detection failed: %v", err)
+		return
+	}
+
+	var smiLog NvidiaSmiLog
+	if err := xml.Unmarshal(stdout, &smiLog); err != nil {
+		log.Printf("GPU detection XML parse error: %v", err)
+		return
+	}
+
+	log.Printf("Detected %s GPU(s)", smiLog.AttachedGPUs)
+	for i, gpu := range smiLog.GPU {
+		log.Printf("  GPU %d: %s | %s | %s", i, gpu.ProductName, gpu.ProductArchitecture, gpu.UUID)
+	}
+}
+
 func main() {
 	if testMode == "1" {
 		log.Print("Test mode is enabled")
 	}
+	logDetectedGPUs()
 	log.Printf("Nvidia SMI exporter listening on %s", listenAddress)
 	http.HandleFunc("/", index)
 	http.HandleFunc("/healthz", healthz)
