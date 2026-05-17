@@ -110,7 +110,7 @@ cat > "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/${PKGNAME}.page" << 'PAGE_E
 Menu="OtherSettings"
 Type="xmenu"
 Title="Nvidia SMI Exporter"
-Icon="icon.png"
+Icon="plugins/nvidia-smi-exporter/icon.png"
 ---
 <?php
 $cfg_file = '/boot/config/plugins/nvidia-smi-exporter/nvidia-smi-exporter.cfg';
