@@ -107,7 +107,7 @@ chmod 755 "${PKGDIR}/etc/rc.d/rc.${PKGNAME}"
 
 # Unraid settings page
 cat > "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/${PKGNAME}.page" << 'PAGE_EOF'
-Menu="OtherSettings"
+Menu="Utilities"
 Type="xmenu"
 Title="Nvidia SMI Exporter"
 Icon="nvidia-smi-exporter.png"
