@@ -27,11 +27,11 @@ echo "Building ${FULLNAME}..."
 mkdir -p \
   "${PKGDIR}/usr/bin" \
   "${PKGDIR}/etc/rc.d" \
-  "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}" \
+  "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/images" \
   "${PKGDIR}/install"
 
 # Icon
-install -m 644 "unraid/icon.png" "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/icon.png"
+install -m 644 "unraid/icon.png" "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/images/${PKGNAME}.png"
 
 # Binary
 install -m 755 "${PKGNAME}" "${PKGDIR}/usr/bin/${PKGNAME}"
@@ -110,7 +110,7 @@ cat > "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/${PKGNAME}.page" << 'PAGE_E
 Menu="OtherSettings"
 Type="xmenu"
 Title="Nvidia SMI Exporter"
-Icon="plugins/nvidia-smi-exporter/icon.png"
+Icon="nvidia-smi-exporter.png"
 ---
 <?php
 $cfg_file = '/boot/config/plugins/nvidia-smi-exporter/nvidia-smi-exporter.cfg';
