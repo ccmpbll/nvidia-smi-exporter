@@ -109,7 +109,7 @@ chmod 755 "${PKGDIR}/etc/rc.d/rc.${PKGNAME}"
 cat > "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/${PKGNAME}.page" << 'PAGE_EOF'
 Menu="Utilities"
 Type="xmenu"
-Title="Nvidia SMI Exporter"
+Title="Nvidia-SMI Exporter"
 Icon="nvidia-smi-exporter.png"
 ---
 <?php
