@@ -95,6 +95,29 @@ After installation, navigate to **Settings → Nvidia SMI Exporter** in the Unra
 
 Settings are persisted to `/boot/config/plugins/nvidia-smi-exporter/nvidia-smi-exporter.cfg`.
 
+## Grafana Dashboard
+
+A pre-built dashboard is included at [`grafana/dashboard.json`](grafana/dashboard.json).
+
+**Sections:**
+- **Overview** — attached GPU count, driver/CUDA version, performance state, fan speed, GPU temperature
+- **Utilization** — GPU, memory controller, encoder, decoder, JPEG, and OFA utilization over time
+- **Memory** — framebuffer and BAR1 memory (total / used / free) over time
+- **Temperature** — GPU and memory temperature with threshold reference lines (T-Limit for Blackwell, max/slow thresholds for older GPUs)
+- **Power** — power draw (with average and instantaneous for Blackwell), power limits (current, default, enforced, min, max)
+- **Clocks** — current graphics, SM, memory, and video clock frequencies; max frequency stats
+- **PCIe** — TX/RX throughput, PCIe generation and link width stats, replay counters
+- **Encoder & FBC** — encoder and frame buffer capture session counts, average FPS, average latency
+- **Processes** — per-process GPU memory usage over time
+
+**To import:**
+
+1. In Grafana, go to **Dashboards → Import**
+2. Upload `grafana/dashboard.json` or paste its contents
+3. Select your Prometheus datasource when prompted
+
+The dashboard includes a **GPU** variable to filter by GPU name, supporting multi-GPU systems.
+
 ## Prometheus Scrape Configuration
 
 ```yaml
