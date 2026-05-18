@@ -1,6 +1,6 @@
 <?xml version='1.0' standalone='yes'?>
 <!DOCTYPE PLUGIN [
-  <!ENTITY name        "Nvidia-SMI Exporter">
+  <!ENTITY name        "nvidia-smi-exporter">
   <!ENTITY author      "ccmpbll">
   <!ENTITY version     "2026.05.17">
   <!ENTITY pluginURL   "https://github.com/ccmpbll/nvidia-smi-exporter/raw/main/unraid/nvidia-smi-exporter.plg">
@@ -13,6 +13,20 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0">
 
 <CHANGES>
+###2026.05.17a###
+- Reverted internal plugin name to match filename slug (fixes Plugins-tab status and changelog popup)
+- Plugins-tab label reverts to "nvidia-smi-exporter"; Tools menu and CA listing still show "Nvidia-SMI Exporter"
+
+###2026.05.17###
+- Renamed plugin display name to "Nvidia-SMI Exporter" across all surfaces
+- Added Grafana dashboard covering all exported metrics
+
+###2026.05.16###
+- Moved settings page to User Utilities under Tools menu
+- Fixed icon install path and settings-page reference to match Unraid convention
+- Updated references to use "Nvidia-Driver" (Limetech official plugin name)
+- Set plugin author to ccmpbll
+
 ###2026.05.12###
 - Initial release
 - Supports NVIDIA Blackwell (RTX 5000-series, driver 595+) and all older architectures
