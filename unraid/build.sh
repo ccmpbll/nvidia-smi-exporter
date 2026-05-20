@@ -33,6 +33,9 @@ mkdir -p \
 # Icon
 install -m 644 "unraid/icon.png" "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/images/${PKGNAME}.png"
 
+# README for Plugins tab description
+install -m 644 "unraid/README.md" "${PKGDIR}/usr/local/emhttp/plugins/${PKGNAME}/README.md"
+
 # Binary
 install -m 755 "${PKGNAME}" "${PKGDIR}/usr/bin/${PKGNAME}"
 rm "${PKGNAME}"
