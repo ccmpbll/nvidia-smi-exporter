@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0">
 
 <CHANGES>
+###2026.05.20a###
+- Add README.md to package for correct name and description display on Plugins tab
+
 ###2026.05.17a###
 - Reverted internal plugin name to match filename slug (fixes Plugins-tab status and changelog popup)
 - Plugins-tab label reverts to "nvidia-smi-exporter"; Tools menu and CA listing still show "Nvidia-SMI Exporter"
