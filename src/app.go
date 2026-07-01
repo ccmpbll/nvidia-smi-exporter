@@ -231,18 +231,14 @@ func gpuLabels(gpu GPU) string {
 		gpu.Id, gpu.UUID, gpu.ProductName, gpu.ProductArchitecture)
 }
 
-func metrics(w http.ResponseWriter, r *http.Request) {
-
-	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
-	defer cancel()
-
+// fetchSMILog runs nvidia-smi (or replays the sample XML in test mode) and
+// parses its output.
+func fetchSMILog(ctx context.Context) (*NvidiaSmiLog, error) {
 	var cmd *exec.Cmd
 	if testMode == "1" {
 		dir, err := os.Getwd()
 		if err != nil {
-			log.Printf("getwd error: %v", err)
-			http.Error(w, "internal error", http.StatusInternalServerError)
-			return
+			return nil, fmt.Errorf("getwd error: %w", err)
 		}
 		cmd = exec.CommandContext(ctx, "/bin/cat", dir+"/nvidia-smi.sample.xml")
 	} else {
@@ -251,15 +247,24 @@ func metrics(w http.ResponseWriter, r *http.Request) {
 
 	stdout, err := cmd.Output()
 	if err != nil {
-		log.Printf("nvidia-smi error: %v", err)
-		http.Error(w, "nvidia-smi failed", http.StatusInternalServerError)
-		return
+		return nil, fmt.Errorf("nvidia-smi error: %w", err)
 	}
 
 	var smiLog NvidiaSmiLog
 	if err := xml.Unmarshal(stdout, &smiLog); err != nil {
-		log.Printf("XML parse error: %v", err)
-		http.Error(w, "XML parse failed", http.StatusInternalServerError)
+		return nil, fmt.Errorf("XML parse error: %w", err)
+	}
+	return &smiLog, nil
+}
+
+func metrics(w http.ResponseWriter, r *http.Request) {
+	ctx, cancel := context.WithTimeout(r.Context(), 10*time.Second)
+	defer cancel()
+
+	smiLog, err := fetchSMILog(ctx)
+	if err != nil {
+		log.Print(err)
+		http.Error(w, "failed to read GPU metrics", http.StatusInternalServerError)
 		return
 	}
 
@@ -412,23 +417,9 @@ func logDetectedGPUs() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	var cmd *exec.Cmd
-	if testMode == "1" {
-		dir, _ := os.Getwd()
-		cmd = exec.CommandContext(ctx, "/bin/cat", dir+"/nvidia-smi.sample.xml")
-	} else {
-		cmd = exec.CommandContext(ctx, nvidiaSMIPath, "-q", "-x")
-	}
-
-	stdout, err := cmd.Output()
+	smiLog, err := fetchSMILog(ctx)
 	if err != nil {
 		log.Printf("GPU detection failed: %v", err)
-		return
-	}
-
-	var smiLog NvidiaSmiLog
-	if err := xml.Unmarshal(stdout, &smiLog); err != nil {
-		log.Printf("GPU detection XML parse error: %v", err)
 		return
 	}
 
