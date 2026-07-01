@@ -13,6 +13,9 @@
 <PLUGIN name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0">
 
 <CHANGES>
+###2026.07.01###
+- Internal refactor: deduped nvidia-smi command execution and XML parsing logic (no user-facing change)
+
 ###2026.05.20a###
 - Add README.md to package for correct name and description display on Plugins tab
 
